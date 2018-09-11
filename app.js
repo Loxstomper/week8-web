@@ -19,7 +19,7 @@ MongoClient.connect(url, {poolSize:10}, function(err, client) {
   require('./add')(db);
   require('./remove')(db);
   require('./update')(db);
-  // require('./read')(db);
+  require('./read')(db);
 
   // db.close();
 });
