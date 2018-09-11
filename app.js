@@ -1,37 +1,24 @@
-var create  = require('./create');
-var add     = require('./add');
-var remove  = require('./remove');
-var update  = require('./update');
-var read    = require('./read');
+// var add;
+var remove;
+var update;
+var read;
 
-const MongoClient = require('mongodb').MongoClient;
-const assert = require('assert');
+var MongoClient = require('mongodb').MongoClient;
+var url = "mongodb://localhost:27017/mydb";
 
-// Connection URL
-const url = 'mongodb://localhost:27017';
+MongoClient.connect(url, {poolSize:10}, function(err, client) {
+  if (err) throw err;
 
-// Database Name
-const dbName = 'myproject';
-
-// Use connect method to connect to the server
-MongoClient.connect(url, function(err, client) {
-  assert.equal(null, err);
-  console.log("Connected successfully to server");
-
+  const dbName = "mydb";
   const db = client.db(dbName);
+  
+  require('./create')(db);
+  require('./add')(db);
+  // require('./remove')(db);
+  // require('./update')(db);
+  // require('./read')(db);
 
-  client.close();
-});
-
-
-MongoClient.connect(url, function(err, client) {
-  assert.equal(null, err);
-  console.log("Connected successfully to server");
-
-  const db = client.db(dbName);
-
-  insertDocuments(db, function() {
-    client.close();
-  });
+  console.log("Database created!");
+  // db.close();
 });
 
