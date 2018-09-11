@@ -7,6 +7,7 @@ var MongoClient = require('mongodb').MongoClient;
 var url = "mongodb://localhost:27017/mydb";
 
 console.log("REMEMBER TO DROP THE COLLECTION - there can be duplicate documents");
+console.log("ALL METHODS USE MANY, witll update many documents");
 
 MongoClient.connect(url, {poolSize:10}, function(err, client) {
   if (err) throw err;
@@ -17,7 +18,7 @@ MongoClient.connect(url, {poolSize:10}, function(err, client) {
   require('./create')(db);
   require('./add')(db);
   require('./remove')(db);
-  // require('./update')(db);
+  require('./update')(db);
   // require('./read')(db);
 
   // db.close();
